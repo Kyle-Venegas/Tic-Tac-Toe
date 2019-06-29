@@ -17,14 +17,13 @@ def board():
        print(y, row)   #after printing row, it goes to the next line
        y += 1
 
+def playerLetter(player):
+    return "X" if player == 1 else "O"
+
 def makemove(player, row, col):
     x = int(row)
     y = int(col)
-    if player == 1:
-        letter = "X"
-    if player == 2:
-        letter = "O"
-    grid[x][y] = letter
+    grid[x][y] = playerLetter(player)
 
 def CheckCol(x, player):
     x = int(x)
@@ -43,18 +42,18 @@ def CheckRow(y, player):
         elif value != grid[y][i] or grid[y][i] == "_":
                 return False
     return True
-
+ 
 def victory2(player):
-    won1 = CheckCol(0, player)
-    won2 = CheckCol(1, player)
-    won3 = CheckCol(2, player)
-    won4 = CheckRow(0, player)
-    won5 = CheckRow(1, player)
-    won6 = CheckRow(2, player)
-    if (won1 or won2 or won3 or won4 or won5 or won6 or            #for diagonals
-        grid[0][0] == grid[1][1] == grid[2][2] == "X" or grid[0][2] == grid[1][1] == grid[2][0] == "X" or
-        grid[0][0] == grid[1][1] == grid[2][2] == "O" or grid[0][2] == grid[1][1] == grid[2][0] == "O"):
-        print("\nPlayer {} wins".format(player)) 
+    for i in range(3):
+        if CheckCol(i, player):
+            return True
+        if CheckRow(i, player):
+            return True
+    # left diagonal
+    if (grid[0][0] == grid[1][1] == grid[2][2] == playerLetter(player)):
+        return True
+    #right diagonal
+    if (grid[0][2] == grid[1][1] == grid[2][0] == playerLetter(player)):
         return True
     return False
 
@@ -63,15 +62,15 @@ import os
 turn = 1
 player = 1
 
-while 1:
+while True:
     os.system("clear")
     board() 
-    end = victory2(player)
-    if end:
-        break
-
     player = who(turn)
     row = input("\nIn what row?: ")
     col = input("In what column?: ")
     makemove(player, row, col)
+    if victory2(player):
+        board()
+        print("\nPlayer {} wins".format(player)) 
+        break
     turn += 1
