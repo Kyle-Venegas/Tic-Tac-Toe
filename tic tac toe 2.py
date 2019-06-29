@@ -39,10 +39,7 @@ def CheckRow(y, player):
     y = int(y)
     for i in range(0, len(grid)):
         if i == 0:
-            if player == 1:
-                value = "X"
-            if player == 2:
-                value = "O"
+            value = grid[y][i]
         elif value != grid[y][i] or grid[y][i] == "_":
                 return False
     return True
