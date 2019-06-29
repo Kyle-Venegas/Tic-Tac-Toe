@@ -27,26 +27,23 @@ def makemove(player, row, col):
     grid[x][y] = letter
 
 def CheckCol(x, player):
-    col = int(x)
-    for y in range(0, len(grid)):
-        if y == 0:
-            if player == 1:
-                value = "X"
-            if player == 2:
-                value = "O"
-        elif value != grid[col][y] or grid[col][0] == "_":
+    x = int(x)
+    for i in range(0, len(grid)):
+        if i == 0:
+            value = grid[i][x]
+        elif value != grid[i][x] or grid[i][x] == "_":
             return False
     return True
 
 def CheckRow(y, player):
-    row = int(y)
-    for x in range(0, len(grid)):
-        if x == 0:
+    y = int(y)
+    for i in range(0, len(grid)):
+        if i == 0:
             if player == 1:
                 value = "X"
             if player == 2:
                 value = "O"
-        elif value != grid[x][row] or grid[0][row] == "_":
+        elif value != grid[y][i] or grid[y][i] == "_":
                 return False
     return True
 
@@ -58,22 +55,23 @@ def victory2(player):
     won5 = CheckRow(1, player)
     won6 = CheckRow(2, player)
     if (won1 or won2 or won3 or won4 or won5 or won6 or            #for diagonals
-        grid[0][0] == grid[1][1] == grid[2][2] or grid[0][2] == grid[1][1] == grid[2][0]):
+        grid[0][0] == grid[1][1] == grid[2][2] == "X" or grid[0][2] == grid[1][1] == grid[2][0] == "X" or
+        grid[0][0] == grid[1][1] == grid[2][2] == "O" or grid[0][2] == grid[1][1] == grid[2][0] == "O"):
         print("\nPlayer {} wins".format(player)) 
-        return 1
+        return True
+    return False
 
 import os
 
-player = 1
 turn = 1
+player = 1
 
 while 1:
     os.system("clear")
     board() 
-    if turn > 5:
-        end = victory2(player)
-        if end == 1:
-            break
+    end = victory2(player)
+    if end:
+        break
 
     player = who(turn)
     row = input("\nIn what row?: ")
