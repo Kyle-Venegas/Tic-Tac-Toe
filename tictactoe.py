@@ -59,6 +59,13 @@ def victory2(player):
         return True
     return False
 
+def check_(player, row, col):
+    row = int(row)
+    col = int(col)
+    if grid[row][col] == "X" or grid[row][col] == "O":
+        return True
+    return False
+
 def playTicTacToe():
     turn = 1
     player = 1
