@@ -57,6 +57,13 @@ def victory2(player):
         return True
     return False
 
+def check_(player, row, col):
+    row = int(row)
+    col = int(col)
+    if grid[row][col] == "X" or grid[row][col] == "O":
+        return True
+    return False
+
 import os
 
 turn = 1
@@ -68,6 +75,8 @@ while True:
     player = who(turn)
     row = input("\nIn what row?: ")
     col = input("In what column?: ")
+    if check_(player, row, col):
+        continue
     makemove(player, row, col)
     if victory2(player):
         board()
