@@ -1,3 +1,5 @@
+import os
+
 grid = [
         ["_", "_", "_"],
         ["_", "_", "_"],
@@ -42,7 +44,7 @@ def CheckRow(y, player):
         elif value != grid[y][i] or grid[y][i] == "_":
                 return False
     return True
- 
+
 def victory2(player):
     for i in range(3):
         if CheckCol(i, player):
@@ -64,22 +66,24 @@ def check_(player, row, col):
         return True
     return False
 
-import os
-
-turn = 1
-player = 1
-
-while True:
-    os.system("clear")
-    board() 
-    player = who(turn)
-    row = input("\nIn what row?: ")
-    col = input("In what column?: ")
-    if check_(player, row, col):
-        continue
-    makemove(player, row, col)
-    if victory2(player):
+def playTicTacToe():
+    turn = 1
+    player = 1
+    while True:
+        os.system("clear")
         board()
-        print("\nPlayer {} wins".format(player)) 
-        break
-    turn += 1
+        player = who(turn)
+        row = input("\nIn what row?: ")
+        col = input("In what column?: ")
+        if check_(player, row, col):
+            continue
+        makemove(player, row, col)
+        if victory2(player):
+            board()
+            print("\nPlayer {} wins".format(player))
+            break
+        turn += 1
+
+
+if __name__ == '__main__':
+    playTicTacToe()
