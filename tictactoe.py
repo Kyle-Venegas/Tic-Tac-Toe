@@ -36,6 +36,11 @@ class Board:
                 return False
         return True
 
+    def check_underscore(self, player, row, col):
+        row = int(row)
+        col = int(col)
+        return self.grid[row][col] == "X" or self.grid[row][col] == "O"
+
     def victory(self, player):
         for i in range(BOARD_SIZE):
             if self.check_col(i, player):
@@ -50,16 +55,8 @@ class Board:
             return True
         return False
 
-    def check_(self, player, row, col):
-        row = int(row)
-        col = int(col)
-        return self.grid[row][col] == "X" or self.grid[row][col] == "O"
-
 def who(turn):
-    if turn % 2 == 0:
-        return 2
-    else:
-        return 1
+    return 2 if (turn % 2 == 0) else 1
 
 def playerLetter(player):
     return "X" if player == 1 else "O"
