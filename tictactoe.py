@@ -7,7 +7,7 @@ class Board:
         self.grid = [["_" for i in range(BOARD_SIZE)] for j in range(BOARD_SIZE)]
 
     def draw(self):
-        print("    0    1    2")
+        print("\n    0    1    2")
         y = 0
         for row in self.grid:
            print(y, row)
@@ -36,6 +36,11 @@ class Board:
                 return False
         return True
 
+    def check_empty_square(self, player, row, col):
+        row = int(row)
+        col = int(col)
+        return self.grid[row][col] == "X" or self.grid[row][col] == "O"
+
     def victory(self, player):
         for i in range(BOARD_SIZE):
             if self.check_col(i, player):
@@ -50,26 +55,8 @@ class Board:
             return True
         return False
 
-    def check_(self, player, row, col):
-        row = int(row)
-        col = int(col)
-        return self.grid[row][col] == "X" or self.grid[row][col] == "O"
-
-    def tie(self):
-        counter = 0
-        for j in range(BOARD_SIZE):
-            for i in range(BOARD_SIZE):
-                if self.grid[j][i] != "_":
-                    counter += 1
-        if counter == 9:
-            return True
-        return False
-
 def who(turn):
-    if turn % 2 == 0:
-        return 2
-    else:
-        return 1
+    return 2 if (turn % 2 == 0) else 1
 
 def playerLetter(player):
     return "X" if player == 1 else "O"
@@ -84,14 +71,14 @@ def playTicTacToe():
         player = who(turn)
         row = input("\nIn what row?: ")
         col = input("In what column?: ")
-        if game.check_(player, row, col):
+        if game.check_empty_square(player, row, col):
             continue
         game.make_move(player, row, col)
         if game.victory(player):
             game.draw()
             print("\nPlayer {} wins".format(player))
             break
-        if game.tie():
+        if turn == 9:
             game.draw()
             print("\nTie")
             break
