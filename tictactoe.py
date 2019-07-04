@@ -36,10 +36,7 @@ class board:
 game = board()
 
 def who(turn):
-    if turn % 2 == 0:
-        return 2
-    else:
-        return 1
+    return 2 if (turn % 2 == 0) else 1
 
 def playerLetter(player):
     return "X" if player == 1 else "O"
