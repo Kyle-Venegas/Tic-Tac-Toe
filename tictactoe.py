@@ -7,7 +7,7 @@ class Board:
         self.grid = [["_" for i in range(BOARD_SIZE)] for j in range(BOARD_SIZE)]
 
     def draw(self):
-        print("    0    1    2")
+        print("\n    0    1    2")
         y = 0
         for row in self.grid:
            print(y, row)
@@ -36,7 +36,7 @@ class Board:
                 return False
         return True
 
-    def check_underscore(self, player, row, col):
+    def check_empty_square(self, player, row, col):
         row = int(row)
         col = int(col)
         return self.grid[row][col] == "X" or self.grid[row][col] == "O"
@@ -71,7 +71,7 @@ def playTicTacToe():
         player = who(turn)
         row = input("\nIn what row?: ")
         col = input("In what column?: ")
-        if game.check_(player, row, col):
+        if game.check_empty_square(player, row, col):
             continue
         game.make_move(player, row, col)
         if game.victory(player):
