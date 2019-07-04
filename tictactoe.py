@@ -55,16 +55,6 @@ class Board:
         col = int(col)
         return self.grid[row][col] == "X" or self.grid[row][col] == "O"
 
-    def tie(self):
-        counter = 0
-        for j in range(BOARD_SIZE):
-            for i in range(BOARD_SIZE):
-                if self.grid[j][i] != "_":
-                    counter += 1
-        if counter == 9:
-            return True
-        return False
-
 def who(turn):
     if turn % 2 == 0:
         return 2
@@ -91,7 +81,7 @@ def playTicTacToe():
             game.draw()
             print("\nPlayer {} wins".format(player))
             break
-        if game.tie():
+        if turn == 9:
             game.draw()
             print("\nTie")
             break
