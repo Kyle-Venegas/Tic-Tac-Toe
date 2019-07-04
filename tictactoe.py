@@ -32,6 +32,15 @@ class board:
         if (self.grid[0][2] == self.grid[1][1] == self.grid[2][0] == playerLetter(player)):
             return True
         return False
+    def tie(self):
+        counter = 0
+        for j in range(BOARD_SIZE):
+            for i in range(BOARD_SIZE):
+                if self.grid[j][i] != "_":
+                    counter += 1
+        if counter == 9:
+            return True
+        return False
 
 game = board()
 
@@ -43,7 +52,6 @@ def who(turn):
 
 def playerLetter(player):
     return "X" if player == 1 else "O"
-
 
 def CheckCol(x, player):
     x = int(x)
@@ -62,7 +70,6 @@ def CheckRow(y, player):
         elif value != game.grid[y][i] or game.grid[y][i] == "_":
                 return False
     return True
-
 
 def check_(player, row, col):
     row = int(row)
@@ -87,8 +94,11 @@ def playTicTacToe():
             game.draw()
             print("\nPlayer {} wins".format(player))
             break
+        if game.tie():
+            game.draw()
+            print("\nTie")
+            break
         turn += 1
-
 
 if __name__ == '__main__':
     playTicTacToe()
