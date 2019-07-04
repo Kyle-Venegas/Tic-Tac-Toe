@@ -5,7 +5,7 @@ BOARD_SIZE = 3
 class board:
 
     def __init__(self):
-        self.grid = [[" " for i in range(BOARD_SIZE)] for j in range(BOARD_SIZE)]
+        self.grid = [["_" for i in range(BOARD_SIZE)] for j in range(BOARD_SIZE)]
 
     def draw(self):
         print("    0    1    2")
