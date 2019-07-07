@@ -14,12 +14,11 @@ class Board:
            y += 1
 
     def make_move(self, player, row, col):
-        x = int(row)
-        y = int(col)
+        x = row
+        y = col
         self.grid[x][y] = playerLetter(player)
 
     def check_col(self, x, player):
-        x = int(x)
         for i in range(0, len(self.grid)):
             if i == 0:
                 value = self.grid[i][x]
@@ -28,7 +27,6 @@ class Board:
         return True
 
     def check_row(self, y, player):
-        y = int(y)
         for i in range(0, len(self.grid)):
             if i == 0:
                 value = self.grid[y][i]
@@ -37,8 +35,6 @@ class Board:
         return True
 
     def check_empty_square(self, player, row, col):
-        row = int(row)
-        col = int(col)
         return self.grid[row][col] == "X" or self.grid[row][col] == "O"
 
     def victory(self, player):
@@ -69,8 +65,8 @@ def playTicTacToe():
         os.system("clear")
         game.draw()
         player = who(turn)
-        row = input("\nIn what row?: ")
-        col = input("In what column?: ")
+        row = int(input("\nIn what row?: "))
+        col = int(input("In what column?: "))
         if game.check_empty_square(player, row, col):
             continue
         game.make_move(player, row, col)
