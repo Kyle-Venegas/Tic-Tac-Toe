@@ -2,4 +2,4 @@
 
 A simple command line game.
 
-Clone and play with python3 tic\ tac\ toe\ 2.py
+Clone and play with python3 tictactoe.py
